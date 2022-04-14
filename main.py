@@ -4,7 +4,6 @@ from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
-from time import sleep
 import json
 from sasta_ai import sasta_ai       
 
@@ -48,7 +47,6 @@ def main():
         for i in x:
             driver.find_element(by=By.XPATH,value="/html/body").send_keys(i)
         driver.find_element(by=By.XPATH,value="/html/body").send_keys(Keys.ENTER)
-        sleep(1)
         blocks=xpaths["rows"][str(row)]
         state={}
         for i in blocks:
