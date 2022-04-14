@@ -29,8 +29,7 @@ def solver(data:tuple,value:int):
                 if eval(c)==True:
                     norepeat.append(x)
                     break
-        except Exception as ex:
-            print(ex)
+        except: 
             pass
         
 def main():
