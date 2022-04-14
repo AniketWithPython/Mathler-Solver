@@ -1,8 +1,8 @@
 # Mathler-Solver
 A selenium and python based software that can solve [mathler.com](https://www.mathler.com/).<br><br>
 
+https://user-images.githubusercontent.com/98256334/163341390-6422c966-10db-44d8-8ef5-1d2076b4a0d5.mp4
 
-https://user-images.githubusercontent.com/98256334/163339093-3af48f7c-c8e0-48a9-95a9-cac61b2401ff.mp4
 
 <br><br>
 To install requirements:<br>
