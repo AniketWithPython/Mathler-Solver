@@ -1,5 +1,9 @@
 # Mathler-Solver
-A selenium and python based software that can solve [mathler.com](https://www.mathler.com/).
+A selenium and python based software that can solve [mathler.com](https://www.mathler.com/).<br><br>
+
+
+https://user-images.githubusercontent.com/98256334/163339093-3af48f7c-c8e0-48a9-95a9-cac61b2401ff.mp4
+
 <br><br>
 To install requirements:<br>
 ```
