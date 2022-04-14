@@ -5,7 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 import json
-from sasta_ai import sasta_ai       
+from sasta_ai import sasta_ai
 
 
 xpaths=json.load(open("./xpaths.json"))
@@ -13,7 +13,7 @@ data=tuple(open("./exps.txt").read().split("\n"))
 row=1
 c="True"        #boolean exp, starts with True
 x=''        #possible expression        
-norepeat=[]
+norepeat=[]     #to prevent repetitions
 
 def solver(data:tuple,value:int):
     #algorithm responsible for determining a possible expression based on the hints/conditions
@@ -28,11 +28,29 @@ def solver(data:tuple,value:int):
                 if eval(c)==True:
                     norepeat.append(x)
                     break
-        except: 
+        except:
             pass
-        
+
+def getstate():
+    #algorithm responsible for getting hints
+    global row
+    blocks=xpaths["rows"][str(row)]
+    state={}
+    for i in blocks:
+        attribute=driver.find_element(by=By.XPATH,value=i).get_attribute("class")
+        if "bg-green" in attribute:
+            state[blocks.index(i)]=["green",x[blocks.index(i)]]
+        elif "bg-slate" in attribute:
+            state[blocks.index(i)]=["slate",x[blocks.index(i)]]
+        elif "bg-yellow" in attribute:
+            state[blocks.index(i)]=["yellow",x[blocks.index(i)]]
+        else:
+            return None
+    row+=1
+    return state
+
 def main():
-    global c,norepeat,x,row
+    global c,norepeat,x,row,driver
     op = webdriver.ChromeOptions()
     op.add_argument('log-level=3')
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=op)
@@ -47,20 +65,8 @@ def main():
         for i in x:
             driver.find_element(by=By.XPATH,value="/html/body").send_keys(i)
         driver.find_element(by=By.XPATH,value="/html/body").send_keys(Keys.ENTER)
-        blocks=xpaths["rows"][str(row)]
-        state={}
-        for i in blocks:
-            attribute=driver.find_element(by=By.XPATH,value=i).get_attribute("class")
-            if "bg-green" in attribute:
-                state[blocks.index(i)]=["green",x[blocks.index(i)]]
-            elif "bg-slate" in attribute:
-                state[blocks.index(i)]=["slate",x[blocks.index(i)]]
-            elif "bg-yellow" in attribute:
-                state[blocks.index(i)]=["yellow",x[blocks.index(i)]]
-            else:
-                continue
-        c+=' and '+sasta_ai(state)
-        row+=1
+        c+=' and '+sasta_ai(getstate())     
+        
         
 try:
     main()
