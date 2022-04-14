@@ -24,9 +24,9 @@ def solver(data:tuple,value:int):
         try:
             if eval(expression)==value:
                 print("testing:",expression)
+                norepeat.append(expression)
                 x=expression
                 if eval(c)==True:
-                    norepeat.append(x)
                     break
         except:
             pass
