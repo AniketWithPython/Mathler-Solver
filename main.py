@@ -9,8 +9,6 @@ import json
 from sasta_ai import sasta_ai       
 
 
-
-
 xpaths=json.load(open("./xpaths.json"))
 data=tuple(open("./exps.txt").read().split("\n"))
 row=1
