@@ -15,9 +15,9 @@ c="True"        #boolean exp, starts with True
 x=''        #possible expression        
 
 
-def solver(data:list,value:int):
+def solver(value:int):
     #algorithm responsible for determining a possible expression based on the hints/conditions
-    global x,c
+    global x,c,data
     for expression in data:
         try:
             if eval(expression)==value:
@@ -48,7 +48,7 @@ def getstate():
     return state
 
 def main():
-    global c,norepeat,x,row,driver
+    global c,x,row,driver
     op = webdriver.ChromeOptions()
     op.add_argument('log-level=3')
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=op)
@@ -58,7 +58,7 @@ def main():
     actions.move_to_element(driver.find_element(by=By.XPATH,value="/html/body/div[2]/div/div/div/div[2]/div[2]/div/div")).move_by_offset(200,0).click().perform()
     problem=int(driver.find_element(by=By.XPATH,value="/html/body/div/div/div[2]/h2").get_attribute("innerHTML").split()[-1])
     while True:
-        solver(data=data,value=problem)
+        solver(value=problem)
         print("Attempting:",x)
         for i in x:
             driver.find_element(by=By.XPATH,value="/html/body").send_keys(i)
