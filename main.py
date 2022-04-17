@@ -6,25 +6,25 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 import json
 from sasta_ai import sasta_ai
+from os import chdir
 
+chdir(r"E:\Random stuff\mathler")
 
 xpaths=json.load(open("./xpaths.json"))
-data=tuple(open("./exps.txt").read().split("\n"))
+data=open("./exps.txt").read().split("\n")
 row=1
 c="True"        #boolean exp, starts with True
 x=''        #possible expression        
-norepeat=[]     #to prevent repetitions
 
-def solver(data:tuple,value:int):
+
+def solver(data:list,value:int):
     #algorithm responsible for determining a possible expression based on the hints/conditions
     global x,norepeat,c
     for expression in data:
-        if expression in norepeat:
-            continue
         try:
             if eval(expression)==value:
                 print("testing:",expression)
-                norepeat.append(expression)
+                data.remove(expression)
                 x=expression
                 if eval(c)==True:
                     break
