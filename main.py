@@ -17,7 +17,7 @@ x=''        #possible expression
 
 def solver(data:list,value:int):
     #algorithm responsible for determining a possible expression based on the hints/conditions
-    global x,norepeat,c
+    global x,c
     for expression in data:
         try:
             if eval(expression)==value:
