@@ -6,14 +6,15 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 import json
 from sasta_ai import sasta_ai
+from os import chdir
 
+chdir(r"E:\Random stuff\mathler")
 
 xpaths=json.load(open("./xpaths.json"))
 data=open("./exps.txt").read().split("\n")
 row=1
 c="True"        #boolean exp, starts with True
 x=''        #possible expression        
-
 
 def solver(value:int):
     #algorithm responsible for determining a possible expression based on the hints/conditions
@@ -63,7 +64,7 @@ def main():
         for i in x:
             driver.find_element(by=By.XPATH,value="/html/body").send_keys(i)
         driver.find_element(by=By.XPATH,value="/html/body").send_keys(Keys.ENTER)
-        c+=' and '+sasta_ai(getstate())     
+        c+=sasta_ai(getstate())     
         
         
 try:

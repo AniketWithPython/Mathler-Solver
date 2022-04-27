@@ -3,13 +3,18 @@
 def sasta_ai(data:dict):
     c=[]
     vals=[i[1] for i in data.values()]
-    for i,j in data.items():
-        index=i
+    for index,j in data.items():
         val=j[1]
-        counts=vals.count(val)
-        if j[0]=="slate" and counts==1:
-            c.append(f"x.count('{val}')==0")
-        elif j[0]=="slate":
+        
+        if j[0]=="slate":
+            test=False
+            for k in data.values():
+                if k[1]==val and k[0]!="slate":
+                    test=True
+                    break
+            if test==False:
+                c.append(f"x.count('{val}')==0")
+        if j[0]=="slate":
             c.append(f"x[{index}]!='{val}'")
         elif j[0]=="yellow":
             c.append(f"x[{index}]!='{val}'")
@@ -21,7 +26,7 @@ def sasta_ai(data:dict):
         elif j[0]=="green":
             c.append(f"x[{index}]=='{val}'")
         
-    return ' and '.join(c)
+    return ' and '+' and '.join(c)
 
 if __name__=="__main__":
     #test
