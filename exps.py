@@ -19,7 +19,6 @@ def badexps(x:str):
     except:
         pass
 
-
 for i in product(CHARS,repeat=6):
     exp=''.join(i)
     try:
@@ -29,9 +28,6 @@ for i in product(CHARS,repeat=6):
         f.write(exp+"\n")
     except:
         pass
-    
-            
+           
 f.close()
 print("done")
-
-
