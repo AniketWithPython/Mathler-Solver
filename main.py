@@ -6,9 +6,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.action_chains import ActionChains
 import json
 from sasta_ai import sasta_ai
-from os import chdir
-
-chdir(r"E:\Random stuff\mathler")
 
 xpaths=json.load(open("./xpaths.json"))
 data=open("./exps.txt").read().split("\n")
