@@ -30,4 +30,3 @@ def sasta_ai(data:dict):
 if __name__=="__main__":
     #test
     print(sasta_ai({0:["yellow","1"],1:["slate","2"],2:["slate","+"],3:["slate","4"],4:["green","3"],5:["green","2"]}))
-
