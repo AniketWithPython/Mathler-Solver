@@ -2,7 +2,6 @@
 
 def sasta_ai(data:dict):
     c=[]
-    vals=[i[1] for i in data.values()]
     for index,j in data.items():
         val=j[1]
         if j[0]=="slate":
