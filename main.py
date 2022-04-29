@@ -41,6 +41,8 @@ def getstate():
         elif "bg-yellow" in attribute:
             state[blocks.index(i)]=["yellow",x[blocks.index(i)]]
         else:
+            for i in range(6):
+                driver.find_element(by=By.XPATH,value="/html/body").send_keys(Keys.BACKSPACE)
             return None
     row+=1
     return state
@@ -61,12 +63,12 @@ def main():
         for i in x:
             driver.find_element(by=By.XPATH,value="/html/body").send_keys(i)
         driver.find_element(by=By.XPATH,value="/html/body").send_keys(Keys.ENTER)
-        c+=sasta_ai(getstate())     
-        
-        
-try:
-    main()
-except:
-    print("Success!!")
-    while True:
-        pass
+        try:
+            c+=sasta_ai(getstate())
+        except AttributeError:
+            pass
+        except:
+            print("Success!")
+            while True:pass
+
+main()
